@@ -2,7 +2,7 @@
     "name": "welio/vr_api_php",
     "autoload": {
         "psr-4": {
-            "App": "./"
+            "App\\": "./"
         }
     },
     "authors": [
