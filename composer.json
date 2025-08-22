@@ -1,0 +1,15 @@
+{
+    "name": "welio/vr_api_php",
+    "autoload": {
+        "psr-4": {
+            "App": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "He2Henrique",
+            "email": "134214073+He2Henrique@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
