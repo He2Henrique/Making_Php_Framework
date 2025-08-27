@@ -13,7 +13,8 @@ class Application{
     }
 
     public function run(){
-        $this->router->resolve();
+        // u need to print the return to see the return from the function
+        echo $this->router->resolve();
     }
     
 }

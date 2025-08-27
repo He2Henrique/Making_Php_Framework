@@ -17,4 +17,8 @@ class Request{
         //return just the path.
         return substr($path, 0, $positon);
    }
+   
+   public function getMethod(){
+      return $_SERVER["REQUEST_METHOD"];
+   }
 }

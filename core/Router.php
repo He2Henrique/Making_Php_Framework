@@ -2,6 +2,7 @@
 
 namespace App\core;
 
+// we will use routes to config the functions that will call through a url path
 class Router{
 
     protected array $routes = [];
@@ -13,14 +14,26 @@ class Router{
     }
     
     public function get($path, $callback){
-        
-        $this->routes['get'][$path] = $callback;
-        
+        $this->routes['GET'][$path] = $callback; 
     }
 
     public function resolve(){
-
         $path = $this->request->getPath();
-        var_dump($path);
+        $method = $this->request->getMethod();
+        $callback = $this->routes[$method][$path] ?? false;
+        if($callback === false){
+            return "Not Found";
+        }
+        if(is_string($callback)){
+            return $this->renderView($callback);
+        }
+        return call_user_func($callback);
+    
+    }
+
+    public function renderView($view){
+
+        require_once __DIR__."/../views/$view.php";
+        
     }
 }
