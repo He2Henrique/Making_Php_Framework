@@ -18,6 +18,7 @@ class Router{
     }
 
     public function resolve(){
+        //there are just two forms to pass callback as a funtion o string
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
@@ -33,7 +34,26 @@ class Router{
 
     public function renderView($view){
 
-        require_once __DIR__."/../views/$view.php";
         
+        $layoutContent = $this->renderLayout();
+        $viewcontent = $this->renderOnlyView($view);
+        return str_replace('{{content}}', $viewcontent, $layoutContent);
+    
+    }
+
+    public function renderLayout(){
+
+        ob_start();
+        require_once Application::$ROOT_DIR."/../views/layouts/main.php";
+        return ob_get_clean();
+    }
+
+
+    public function renderOnlyView($view){
+
+        ob_start();
+        require_once Application::$ROOT_DIR."/../views/$view.php";
+        return ob_get_clean();// cleans the buffer when the content is returned
+    
     }
 }
