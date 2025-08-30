@@ -16,6 +16,6 @@ $app->router->get('/main', function(){
     echo "My friend";
 });
 
-$app->router->get('/con', 'casa');
+$app->router->get('/con', 'main');
 
 $app->run();
