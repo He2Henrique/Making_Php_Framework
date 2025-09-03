@@ -1,3 +1,8 @@
-<?php ?>
+<?php
+    $var;
 
-<h1>hellooooo</h1>
+?>
+
+<h1>hellooooo
+    <? $__Params__['name']?>
+    < /h1>
