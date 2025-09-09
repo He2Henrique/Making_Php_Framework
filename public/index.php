@@ -18,4 +18,6 @@ $app->router->get('/main', function(){
 
 $app->router->get('/con', 'main');
 
+$app->router->get('/form', 'checklist');
+
 $app->run();

@@ -29,32 +29,20 @@ class Router{
             return "Not Found";
         }
         if(is_string($callback)){
-            return $this->renderTagsInView($callback);
+            return $this->render($callback);
         }
         return call_user_func($callback);
     
     }
 
-    //Component main -> they have some tags that u specifiy
-    // this component can have 1 or more tags
-    // to each tag the aplication will render this component
-    // func component(component)-> return the component
-    // the return will replace the tags
-    // func(page) -> foreach tag -> local replace local[start, end] to component
-    // component can have parameters
-    
+    public function render($view){
 
-    public function renderTagsInView($view){
-        $regex = "/\{\{(.*?)\}\}/";
-        $viewcontent = $this->renderOnlyView($view);
+        $layoutContent = $this->renderderlayout('basic');
+        $viewcontent = $this->renderOnlyView($view); 
+    
+        // preg_repla... is use to patterns and str_replace is use to literal strings.
+        return str_replace('{{content}}', $viewcontent, $layoutContent);
         
-        preg_match_all($regex, $viewcontent, $matches);
-        foreach($matches[1] as $match){
-            
-            $componentContent = $this->renderderContent($match);
-            $viewcontent = preg_replace($regex, $componentContent, $viewcontent);
-        }
-        return $viewcontent;
     }
 
     public function renderOnlyView($view){
@@ -62,15 +50,32 @@ class Router{
         ob_start();
         require_once Application::$ROOT_DIR."/../views/$view.php";
         return ob_get_clean();// cleans the buffer when the content is returned
-    
-    }
 
-    public function renderderContent($tag){
+    }
+    public function renderderlayout($layout){
         ob_start();
-        require_once Application::$ROOT_DIR."/../views/components/$tag.php";
+        require_once Application::$ROOT_DIR."/../views/layouts/$layout.php";
         return ob_get_clean();// cleans the buffer when the content is returned
     }
 
-    //next steps is implements a way to use recursion because a component can have another components...
-    // and a why to pass parameters to the components.
+    // public function renderViewsinTemplate($template){
+    //     $regex = "/\{\{(.*?)\}\}/";
+    //     $teamplateContent = $this->renderderContent($template);
+        
+        
+    //     preg_match_all($regex, $teamplateContent, $matches);
+    //     foreach($matches[1] as $match){
+            
+    //         $viewcontent = $this->renderOnlyView($match);
+    //         $teamplateContent = preg_replace($regex, $viewcontent, $teamplateContent);
+    //     }
+    //     return $teamplateContent;
+    // }
+
+    // i need to change this
+    // we have templates of the site 
+    //inside we got views
+    // but in view we can have another thing it call cards
+    //can load multiple views. inside one template
+
 }
