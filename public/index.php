@@ -8,16 +8,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 $app = new Application(__DIR__);
 
 
-$app->router->get('/', function(){
-    echo "hello world";
-});
-
-$app->router->get('/main', function(){
-    echo "My friend";
-});
-
-$app->router->get('/con', 'main');
-
-$app->router->get('/form', 'checklist');
+$app->router->get('/home', [SiteController::class, 'home']);
+$app->router->post('/home', [SiteController::class, 'home']);
 
 $app->run();

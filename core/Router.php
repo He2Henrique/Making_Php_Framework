@@ -15,8 +15,13 @@ class Router{
         $this->response = $response;
     }
     
+    //here you define the routes, to after u we call
     public function get($path, $callback){
         $this->routes['GET'][$path] = $callback; 
+    }
+
+    public function post($path, $callback){
+        $this->routes['POST'][$path] = $callback; 
     }
 
     public function resolve(){
@@ -26,7 +31,7 @@ class Router{
         $callback = $this->routes[$method][$path] ?? false;
         if($callback === false){
             $this->response->SetStatusCode(404);
-            return "Not Found";
+            return $this->render("_404");
         }
         if(is_string($callback)){
             return $this->render($callback);
