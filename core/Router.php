@@ -36,23 +36,28 @@ class Router{
         if(is_string($callback)){
             return $this->render($callback);
         }
+        if(is_array($callback)){
+            $callback[0] = new $callback[0]();
+        }
         return call_user_func($callback);
     
     }
 
-    public function render($view){
-
+    public function render($view, $params=[]){
         $layoutContent = $this->renderderlayout('basic');
-        $viewcontent = $this->renderOnlyView($view); 
+        $viewcontent = $this->renderOnlyView($view, $params); 
     
         // preg_repla... is use to patterns and str_replace is use to literal strings.
         return str_replace('{{content}}', $viewcontent, $layoutContent);
         
     }
 
-    public function renderOnlyView($view){
+    public function renderOnlyView($view, $params){
 
         ob_start();
+        foreach($params as $key => $value){
+            $$key = $value;
+        }
         require_once Application::$ROOT_DIR."/../views/$view.php";
         return ob_get_clean();// cleans the buffer when the content is returned
 

@@ -1,15 +1,12 @@
-<?
+<?php
 
-use App\core\Application;
+namespace App\core;
 
 
 class Controller{
 
-    public function render($view){
-        Application::$app->router->render($view);
+    public function renderview($view, $params){
+        return Application::$app->router->render($view, $params);
     }
     
 }
-
-
-?>

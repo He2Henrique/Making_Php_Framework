@@ -1,19 +1,22 @@
-<?
+<?php
 
-use App\core\Application;
+namespace App\controllers;
 
+use App\core\Controller;
 
 class SiteController extends Controller{
 
     public function home(){
-        echo "hello";
+
+        $params = [
+            'hello' => "hello world"
+        ];
+        
+        return $this->renderview('main', $params);
     }
 
-    public function handledata(){
+    public function handleData(){
         
     }
     
 }
-
-
-?>
