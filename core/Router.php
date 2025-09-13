@@ -43,10 +43,16 @@ class Router{
     
     }
 
-    public function render($view, $params=[]){
-        $layoutContent = $this->renderderlayout('pills_navbar');
-        $viewcontent = $this->renderOnlyView($view, $params); 
-    
+    public function render($view, $layout=false, $params=[]){
+
+        $viewcontent = $this->renderOnlyView($view, $params);
+        
+        if(!$layout){
+            return $viewcontent;
+        }
+
+        $layoutContent = $this->renderderlayout($layout) ?? false;
+         
         // preg_repla... is use to patterns and str_replace is use to literal strings.
         return str_replace('{{content}}', $viewcontent, $layoutContent);
         
