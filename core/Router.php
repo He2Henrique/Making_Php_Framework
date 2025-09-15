@@ -39,7 +39,7 @@ class Router{
         if(is_array($callback)){
             $callback[0] = new $callback[0]();
         }
-        return call_user_func($callback);
+        return call_user_func($callback, $this->request);
     
     }
 
@@ -51,7 +51,7 @@ class Router{
             return $viewcontent;
         }
 
-        $layoutContent = $this->renderderlayout($layout) ?? false;
+        $layoutContent = $this->renderderlayout($layout);
          
         // preg_repla... is use to patterns and str_replace is use to literal strings.
         return str_replace('{{content}}', $viewcontent, $layoutContent);
