@@ -17,6 +17,7 @@ class Router{
     
     //here you define the routes, to after u we call
     public function get($path, $callback){
+        // echo "$path, $callback";
         $this->routes['GET'][$path] = $callback; 
     }
 
@@ -28,6 +29,9 @@ class Router{
         //there are just two forms to pass callback as a funtion o string
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
+
+        // echo "\n $path, $method \n";
+
         $callback = $this->routes[$method][$path] ?? false;
         if($callback === false){
             $this->response->SetStatusCode(404);

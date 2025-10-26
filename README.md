@@ -8,3 +8,4 @@ than will the composer json will be initialized the vendor folder.
 
 ## Obejtives 
 - add a builder agent to build the main files when copy this library
+- add a debug mode to see what are the values of variebles.

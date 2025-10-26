@@ -18,5 +18,14 @@ class DataBase{
     public function __construct($VAR){
         $this->pdo = new PDO($VAR['DB_DSN'], $VAR['DB_USER'], $VAR['DB_PASSWORD'], $this->options);
     }
+
+    public function simple_query(){
+        $sql = "SELECT * FROM `exemplo` WHERE 1";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
 }

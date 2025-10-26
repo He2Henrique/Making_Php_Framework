@@ -4,10 +4,20 @@ namespace App\core;
 
 class Request{
     
+   public $main_root;
+
+   public function __construct($main_root){
+      $this->main_root = $main_root;
+   }
+
    public function getpath(){
 
         //we can check if that is a main domain or other path
+        // the variables changes a loot depends on what the main serve application is running.
         $path = $_SERVER["REQUEST_URI"] ?? '/';
+
+        $path = str_replace($this->main_root,'',$path);
+
         // but request can pass more information by the url 
         // so we need to capture what is path and what is parameters
         $positon = strpos($path,'?');
