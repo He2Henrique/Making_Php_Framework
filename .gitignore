@@ -1,4 +1,6 @@
 /vendor/
 /css/
 
-.env
+/controllers/SiteController.php
+
+/Models/

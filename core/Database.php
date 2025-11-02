@@ -19,13 +19,10 @@ class DataBase{
         $this->pdo = new PDO($VAR['DB_DSN'], $VAR['DB_USER'], $VAR['DB_PASSWORD'], $this->options);
     }
 
-    public function simple_query(){
-        $sql = "SELECT * FROM `exemplo` WHERE 1";
+    public function get_statement($query){
+        
+        return $this->pdo->prepare($query);
 
-        $stmt = $this->pdo->prepare($sql);
-
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
 }

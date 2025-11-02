@@ -26,7 +26,6 @@ class Application{
         //conection with BD
         self::$DatabaseConnetion = new Database(self::$_CONFIGS);
 
-
     }
 
     public function run(){

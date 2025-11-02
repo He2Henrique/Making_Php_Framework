@@ -13,5 +13,7 @@ if(!is_dir($path)){
     echo "The $path already exist";
 }
 
-
+#help to create a index.php 
+# if public alredy exists crates index
+# if both exists ask to user if they want to rewrite the index
 ?>
