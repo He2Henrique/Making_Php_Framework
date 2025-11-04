@@ -31,7 +31,7 @@ class Application{
     public function run(){
 
         // echo '<pre>';
-        // var_dump($_SERVER);
+        // var_dump($result);
         // echo '</pre>';
         // u need to print the return to see the return from the function
         echo $this->router->resolve();
