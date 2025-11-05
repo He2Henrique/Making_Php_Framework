@@ -5,21 +5,27 @@ namespace App\controllers;
 use App\core\Controller;
 use App\core\Request;
 use App\core\Application;
-use App\models\ManagerClass;
+use App\repositories\ClassRepository;
+use App\repositories\ClassmatesRepository;
 use App\core\Data;
+
+use App\models\ClassModel;
+
 
 class SiteController extends Controller{
     public Application $app;
 
     public function home(){
         $data = new Data();
+        $diasemana = $data->getDiaSemanaAtual();
         $data = $data->getDataString();
-
+        
         $connection = Application::$DatabaseConnetion;
         
-        $conn = new ManagerClass($connection);
-        $turmas = $conn->TurmasHJ();
-        $aulas = $conn->AulasRealizadasHJ();
+        $classmatesrepository = new ClassmatesRepository($connection);
+        $classRepository = new ClassRepository($connection);
+        $turmas = $classmatesrepository->findAllBy('dia_sem', $diasemana );
+        $aulas = $classRepository->findAllby(        'data_', $data      );
 
         $aulas_turmas_ragistradas = array_column($aulas, 'id_turma');
 
@@ -30,6 +36,15 @@ class SiteController extends Controller{
         ];
         
         return $this->renderview('today_class', 'basic', $params);
+    }
+
+    public function teste(){
+        $connection = Application::$DatabaseConnetion;
+        $instance = new ClassRepository($connection);
+        
+        $classmodel = new ClassModel($instance);
+        var_dump($classmodel);
+
     }
 
     public function handleData(Request $request){

@@ -1,15 +1,41 @@
 <?php
 namespace App\core;
 
-use App\core\Database;
+
+use Exception;
+use App\core\Repository;
+
 
 class Model {
 
-    public Database $connection;
+    protected Repository $repoinstance;
+    
+    public function __construct($repoinstance){
+        
+        $this->repoinstance = $repoinstance;
 
-    public function __construct($connection){
-        $this->connection = $connection;
+        $table_fields = $this->repoinstance->GetTableInfo();
+        try{
+            foreach ($table_fields as $value){
+            
+            if(!property_exists($this, $value['Field'])){
+                throw new Exception("The property dont exists ´{$value['Field']}´");
+            }
+            var_dump($value['Field']);
+           
+            } 
+        }catch(Exception $e){
+            echo $e->getMessage();
+
+        }
+        
     }
+
+    // //if is the right type, if is 
+    // protected function validate($values){
+
+        
+    // }
 
     
 }

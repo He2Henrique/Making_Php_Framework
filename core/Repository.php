@@ -46,11 +46,20 @@ abstract class Repository {
     }
 
     public function deleteById(string $id_field, string $value){
-       $stmt = $this->connection->get_statement("DELETE FROM $this->table where $id_field = :value_");
+       $stmt = $this->connection->get_statement("DELETE FROM `{$this->table}` where $id_field = :value_");
 
        $stmt->bindValue(':value_', $value , PDO::PARAM_STR);
 
        $stmt->execute();
+    }
+
+    public function GetTableInfo(){
+      
+      $stmt = $this->connection->get_statement("SHOW COLUMNS FROM `{$this->table}`");
+
+       $stmt->execute();
+
+       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
