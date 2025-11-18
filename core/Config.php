@@ -1,6 +1,7 @@
 <?php 
 
-namespace App\core;
+
+namespace Core;
 
 class Config{
 

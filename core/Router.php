@@ -1,6 +1,6 @@
 <?php
 
-namespace App\core;
+namespace Core;
 
 // we will use routes to config the functions that will call through a url path
 class Router{

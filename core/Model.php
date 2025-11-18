@@ -1,9 +1,10 @@
 <?php
-namespace App\core;
+
+namespace Core;
 
 
 use Exception;
-use App\core\Repository;
+use Core\Repository;
 
 
 class Model {

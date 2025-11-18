@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Core;
+
+namespace Core;
 use Datetime;
 use InvalidArgumentException;
 date_default_timezone_set('America/Sao_Paulo'); 

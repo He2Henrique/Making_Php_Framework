@@ -1,7 +1,8 @@
 <?php
-namespace App\core;
 
-use App\core\Database;
+namespace Core;
+
+use Core\Database;
 
 use PDO;
 
