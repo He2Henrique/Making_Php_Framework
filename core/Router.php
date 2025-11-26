@@ -68,12 +68,15 @@ class Router{
         foreach($params as $key => $value){
             $$key = $value;
         }
+        
         require_once Application::$ROOT_DIR."/../views/$view.php";
         return ob_get_clean();// cleans the buffer when the content is returned
 
     }
     public function renderderlayout($layout){
         ob_start();
+        $_URLPATH = Application::$_CONFIGS['MAIN_ROOT'];
+        $_CURRENTPATH = $this->request->getpath();
         require_once Application::$ROOT_DIR."/../views/layouts/$layout.php";
         return ob_get_clean();// cleans the buffer when the content is returned
     }

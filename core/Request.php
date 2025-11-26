@@ -34,20 +34,14 @@ class Request{
 
    public function getBody(){
       $body= [];
-      echo $this->getMethod();
       if($this->getMethod() === 'GET'){
-         echo 'get';
          foreach($_GET as $key => $_){
-            echo $key;
             $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
          }
       }
 
       if($this->getMethod() === 'POST'){
-         echo 'post <br>';
-         var_dump($_POST);
          foreach($_POST as $key => $_){
-            echo $key;
             $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
          }
       }

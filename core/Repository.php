@@ -3,7 +3,8 @@
 namespace Core;
 
 use Core\Database;
-
+use Core\Application;
+use Exception;
 use PDO;
 
 abstract class Repository {
@@ -11,8 +12,8 @@ abstract class Repository {
     protected Database $connection;
     protected string $table;
 
-    public function __construct($connection){
-        $this->connection = $connection;
+    public function __construct(){
+        $this->connection = Application::$DatabaseConnetion;
     }
 
     public function setTableName(string $table){
@@ -61,6 +62,15 @@ abstract class Repository {
        $stmt->execute();
 
        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function execute_sql(string $sql, array $values){
+      try{
+         $stmt = $this->connection->get_statement($sql);
+         $stmt->execute($values);
+      }catch(Exception $e){
+         echo $e->getCode();
+      }
     }
 
 
